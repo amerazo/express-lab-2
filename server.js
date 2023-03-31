@@ -33,6 +33,37 @@ app.get("/magic/:question", (req, res) =>{
 
 })
 
+//-------------Beer-------------------------------//
+//-------------Beer-------------------------------//
+
+//(On the home page (get "/"), users should see: "99 Bottles of beer on the wall")//
+app.get('/', (req, res) => {
+  res.send('<h1>99 Bottles of beer on the wall</h1><a href="/98">Take one down, pass it around</a>');
+});
+
+app.get('/:number_of_bottles', (req, res) => {
+  const numOfBottles = parseInt(req.params.number_of_bottles);
+  
+  //---Bottles Left? ---------//
+  //---Bottles Left? ---------//
+
+  if (numOfBottles > 0) {
+    let nextNumOfBottles = numOfBottles - 1;
+    let link = `<a href="/${nextNumOfBottles}">Take one down, pass it around</a>`;
+        
+    //--Show the number of bottles and the link to take one down--//
+     //--Show the number of bottles and the link to take one down--//
+    res.send(`<h1>${bottlesLeft} of beer on the wall</h1>${link}`);
+    
+    // if there are 0 bottles left, add a link to start over
+    if (nextNumOfBottles === 0) {
+      res.send(`<br><a href="/">Start over</a>`);
+    }
+  } else {
+    // if there are 0 bottles left, show a message and a link to start over
+    res.send(`<h1>No more bottles of beer on the wall</h1><a href="/">Start over</a>`);
+  }
+});
 
 //-----------Listen for Server------------------------//
 //-----------Listen for Server------------------------//
